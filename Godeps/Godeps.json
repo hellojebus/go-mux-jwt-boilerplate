@@ -2,8 +2,11 @@
 	"ImportPath": "github.com/hellojebus/go-envoz-api",
 	"GoVersion": "go1.10",
 	"GodepVersion": "v80",
-	"Packages": [
-		"./"
-	],
-	"Deps": []
+	"Deps": [
+		{
+			"ImportPath": "github.com/gorilla/mux",
+			"Comment": "v1.6.2-2-ge0b5aba",
+			"Rev": "e0b5abaaae35242fa74372f26c24107711702a4e"
+		}
+	]
 }
