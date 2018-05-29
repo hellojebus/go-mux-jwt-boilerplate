@@ -1,1 +1,1 @@
-web: main
+web: go-envoz-api
