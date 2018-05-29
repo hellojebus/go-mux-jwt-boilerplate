@@ -2,7 +2,6 @@ package main
 
 import (
 	"github.com/gorilla/mux"
-	"fmt"
 	"net/http"
 	"log"
 )
@@ -14,5 +13,5 @@ func main(){
 }
 
 func HomeHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("Home handler")
+	w.Write([]byte("Home handler"))
 }
