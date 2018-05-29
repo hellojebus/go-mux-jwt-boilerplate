@@ -2,5 +2,8 @@
 	"ImportPath": "github.com/hellojebus/go-envoz-api",
 	"GoVersion": "go1.10",
 	"GodepVersion": "v80",
+	"Packages": [
+		"./"
+	],
 	"Deps": []
 }
