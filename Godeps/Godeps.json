@@ -7,6 +7,10 @@
 			"ImportPath": "github.com/gorilla/mux",
 			"Comment": "v1.6.2-2-ge0b5aba",
 			"Rev": "e0b5abaaae35242fa74372f26c24107711702a4e"
+		},
+		{
+			"ImportPath": "github.com/jpfuentes2/go-env",
+			"Rev": "8e0a68de05f21bcefcd581c6b934a1d1e4390fa1"
 		}
 	]
 }
