@@ -15,5 +15,9 @@ func main(){
 }
 
 func HomeHandler(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("Home handler"))
+	name, err := os.Hostname()
+	if err != nil {
+		panic(err)
+	}
+	w.Write([]byte("Hostname: "+ name))
 }
