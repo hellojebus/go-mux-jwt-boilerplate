@@ -23,7 +23,7 @@ func HomeHandler(w http.ResponseWriter, r *http.Request) {
 	if strings.Contains(r.Host, "localhost") {
 		env.ReadEnv(path.Join(pwd, ".env"))
 		for _, v := range os.Environ() {
-			w.Write([]byte("env: " + v))
+			w.Write([]byte(v))
 		}
 	} else {
 		w.Write([]byte("host: " + r.Host))
