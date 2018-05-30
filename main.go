@@ -5,6 +5,9 @@ import (
 	"net/http"
 	"log"
 	"os"
+	"github.com/jpfuentes2/go-env"
+	"path"
+	"strings"
 )
 
 func main(){
@@ -15,5 +18,14 @@ func main(){
 }
 
 func HomeHandler(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("Hostname: "+ r.Host))
+	pwd, _ := os.Getwd()
+	if strings.Contains(r.Host, "localhost") {
+		env.ReadEnv(path.Join(pwd, ".env"))
+		for _, v := range os.Environ() {
+			w.Write([]byte("env: " + v))
+		}
+	} else {
+		w.Write([]byte("host: " + r.Host))
+	}
+
 }
