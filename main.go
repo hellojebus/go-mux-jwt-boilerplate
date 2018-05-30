@@ -19,6 +19,7 @@ func main(){
 
 func HomeHandler(w http.ResponseWriter, r *http.Request) {
 	pwd, _ := os.Getwd()
+	//load up the env package only in local env
 	if strings.Contains(r.Host, "localhost") {
 		env.ReadEnv(path.Join(pwd, ".env"))
 		for _, v := range os.Environ() {
