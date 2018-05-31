@@ -12,6 +12,11 @@ import (
 	"fmt"
 )
 
+type User struct {
+	ID   int
+	Email string
+}
+
 func main(){
 
 	//read env
@@ -44,6 +49,9 @@ func HomeHandler(w http.ResponseWriter, r *http.Request) {
 	for _, v := range os.Environ() {
 		w.Write([]byte("env: " + v))
 	}
+	db, err := gorm.Open("mysql", dbUser+":"+ dbPassword +"@tcp(" + dbHost+ ":3306)/"+ dbName)
+	fmt.Println(w, db.First(&User))
+	defer db.Close()
 
 	r.Body.Close()
 

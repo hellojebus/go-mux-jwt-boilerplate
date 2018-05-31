@@ -4,9 +4,28 @@
 	"GodepVersion": "v80",
 	"Deps": [
 		{
+			"ImportPath": "github.com/go-sql-driver/mysql",
+			"Comment": "v1.3.0-69-g7413002",
+			"Rev": "7413002f368fba928eefaf762c91a2acfeabdf68"
+		},
+		{
 			"ImportPath": "github.com/gorilla/mux",
 			"Comment": "v1.6.2-2-ge0b5aba",
 			"Rev": "e0b5abaaae35242fa74372f26c24107711702a4e"
+		},
+		{
+			"ImportPath": "github.com/jinzhu/gorm",
+			"Comment": "v1.9.1-7-g82eb9f8",
+			"Rev": "82eb9f8a5bbb5e6b929d2f0ae5b934e6a253f94e"
+		},
+		{
+			"ImportPath": "github.com/jinzhu/gorm/dialects/mysql",
+			"Comment": "v1.9.1-7-g82eb9f8",
+			"Rev": "82eb9f8a5bbb5e6b929d2f0ae5b934e6a253f94e"
+		},
+		{
+			"ImportPath": "github.com/jinzhu/inflection",
+			"Rev": "04140366298a54a039076d798123ffa108fff46c"
 		},
 		{
 			"ImportPath": "github.com/jpfuentes2/go-env",
