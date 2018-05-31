@@ -30,7 +30,7 @@ func main(){
 	env.ReadEnv(path.Join(pwd, ".env"))
 
 
-	db, err := gorm.Open("mysql", dbUser+":"+ dbPassword +"@tcp(" + dbHost+ ":3306)/"+ dbName)
+	db, err := gorm.Open("mysql", dbUser+":"+ dbPassword +"@tcp(" + dbHost+ ":3306)/"+ dbName + "?charset=utf8&parseTime=True&loc=Local")
 	defer db.Close()
 
 	//init router
@@ -47,7 +47,7 @@ func main(){
 
 func HomeHandler(w http.ResponseWriter, r *http.Request) {
 
-	db, err := gorm.Open("mysql", dbUser+":"+ dbPassword +"@tcp(" + dbHost+ ":3306)/"+ dbName)
+	db, err := gorm.Open("mysql", dbUser+":"+ dbPassword +"@tcp(" + dbHost+ ":3306)/"+ dbName + "?charset=utf8&parseTime=True&loc=Local")
 	if err != nil {
 		fmt.Println(err)
 	}
