@@ -10,6 +10,7 @@ import (
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 	"fmt"
+	"encoding/json"
 )
 
 type User struct {
@@ -46,7 +47,9 @@ func HomeHandler(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		fmt.Println(w, err)
 	}
-	fmt.Println(w, db.First(&User{}, 1))
+	user := db.First(&User{}, 1)
+	u, _ := json.Marshal(user)
+	fmt.Println(w, u)
 	defer db.Close()
 
 	r.Body.Close()
