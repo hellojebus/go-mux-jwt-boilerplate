@@ -49,9 +49,9 @@ func HomeHandler(w http.ResponseWriter, r *http.Request) {
 	for _, v := range os.Environ() {
 		w.Write([]byte("env: " + v))
 	}
-	db, err := gorm.Open("mysql", dbUser+":"+ dbPassword +"@tcp(" + dbHost+ ":3306)/"+ dbName)
-	fmt.Println(w, db.First(&User))
-	defer db.Close()
+	//db, err := gorm.Open("mysql", dbUser+":"+ dbPassword +"@tcp(" + dbHost+ ":3306)/"+ dbName)
+	//fmt.Println(w, db.First(&user))
+	//defer db.Close()
 
 	r.Body.Close()
 
