@@ -17,17 +17,19 @@ type User struct {
 	Email string
 }
 
+//connect to db
+var dbHost string = os.Getenv("DB_HOST")
+var dbName string = os.Getenv("DB_NAME")
+var dbUser string = os.Getenv("DB_USER")
+var dbPassword string = os.Getenv("DB_PASSWORD")
+
 func main(){
 
 	//read env
 	pwd, _ := os.Getwd()
 	env.ReadEnv(path.Join(pwd, ".env"))
 
-	//connect to db
-	dbHost := os.Getenv("DB_HOST")
-	dbName := os.Getenv("DB_NAME")
-	dbUser := os.Getenv("DB_USER")
-	dbPassword := os.Getenv("DB_PASSWORD")
+
 	db, err := gorm.Open("mysql", dbUser+":"+ dbPassword +"@tcp(" + dbHost+ ":3306)/"+ dbName)
 	defer db.Close()
 
@@ -45,13 +47,12 @@ func main(){
 
 func HomeHandler(w http.ResponseWriter, r *http.Request) {
 
-	//load up the env package only in local env
-	for _, v := range os.Environ() {
-		w.Write([]byte("env: " + v))
+	db, err := gorm.Open("mysql", dbUser+":"+ dbPassword +"@tcp(" + dbHost+ ":3306)/"+ dbName)
+	if err != nil {
+		fmt.Println(err)
 	}
-	//db, err := gorm.Open("mysql", dbUser+":"+ dbPassword +"@tcp(" + dbHost+ ":3306)/"+ dbName)
-	//fmt.Println(w, db.First(&user))
-	//defer db.Close()
+	fmt.Println(w, db.First(1))
+	defer db.Close()
 
 	r.Body.Close()
 
