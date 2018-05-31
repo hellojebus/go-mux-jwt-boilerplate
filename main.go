@@ -8,7 +8,7 @@ import (
 	"github.com/jpfuentes2/go-env"
 	"path"
 	"github.com/jinzhu/gorm"
-	_ "github.com/go-sql-driver/mysql"
+	_ "github.com/jinzhu/gorm/dialects/mysql"
 	"fmt"
 )
 
