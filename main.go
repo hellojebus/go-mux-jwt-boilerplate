@@ -44,7 +44,7 @@ func HomeHandler(w http.ResponseWriter, r *http.Request) {
 
 	db, err := gorm.Open("mysql", dbUser+":"+ dbPassword +"@tcp(" + dbHost+ ":3306)/"+ dbName + "?charset=utf8&parseTime=True&loc=Local")
 	if err != nil {
-		fmt.Println(err)
+		fmt.Println(w, err)
 	}
 	fmt.Println(w, db.First(1))
 	defer db.Close()
