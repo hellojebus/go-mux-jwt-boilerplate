@@ -23,8 +23,7 @@ func main(){
 	dbName := os.Getenv("DB_NAME")
 	dbUser := os.Getenv("DB_USER")
 	dbPassword := os.Getenv("DB_PASSWORD")
-	db, err := gorm.Open("mysql",
-		dbUser+":"+ dbPassword +"@tcp(" + dbHost+ ":3306)/"+ dbName)
+	db, err := gorm.Open("mysql", dbUser+":"+ dbPassword +"@tcp(" + dbHost+ ":3306)/"+ dbName)
 	defer db.Close()
 
 	//init router
@@ -45,5 +44,7 @@ func HomeHandler(w http.ResponseWriter, r *http.Request) {
 	for _, v := range os.Environ() {
 		w.Write([]byte("env: " + v))
 	}
+
+	r.Body.Close()
 
 }
