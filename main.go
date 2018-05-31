@@ -29,19 +29,14 @@ func main(){
 	pwd, _ := os.Getwd()
 	env.ReadEnv(path.Join(pwd, ".env"))
 
-
-	db, err := gorm.Open("mysql", dbUser+":"+ dbPassword +"@tcp(" + dbHost+ ":3306)/"+ dbName + "?charset=utf8&parseTime=True&loc=Local")
-	defer db.Close()
-
 	//init router
 	port := os.Getenv("PORT")
 	router := mux.NewRouter()
 
-	if err != nil {
-		fmt.Println(err)
-	}
-
+	//routes
 	router.HandleFunc("/", HomeHandler).Methods("GET")
+
+	//create http server
 	log.Fatal(http.ListenAndServe(":"+port, router))
 }
 
