@@ -7,23 +7,25 @@ import (
 	"os"
 	"github.com/jpfuentes2/go-env"
 	"path"
-	"strings"
 )
 
 func main(){
 	port := os.Getenv("PORT")
-	r := mux.NewRouter()
-	r.HandleFunc("/", HomeHandler)
-	log.Fatal(http.ListenAndServe(":"+port, r))
+	router := mux.NewRouter()
+
+	//get env vars
+	pwd, _ := os.Getwd()
+	env.ReadEnv(path.Join(pwd, ".env"))
+
+	router.HandleFunc("/", HomeHandler).Methods("GET")
+	log.Fatal(http.ListenAndServe(":"+port, router))
 }
 
 func HomeHandler(w http.ResponseWriter, r *http.Request) {
-	pwd, _ := os.Getwd()
+
 	//load up the env package only in local env
-	if strings.Contains(r.Host, "localhost") {
-		env.ReadEnv(path.Join(pwd, ".env"))
-	} else {
-		w.Write([]byte("host: " + r.Host))
+	for _, v := range os.Environ() {
+		w.Write([]byte("env: " + v))
 	}
 
 }
