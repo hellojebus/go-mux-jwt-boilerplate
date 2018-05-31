@@ -46,7 +46,7 @@ func HomeHandler(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		fmt.Println(w, err)
 	}
-	fmt.Println(w, db.First(1))
+	fmt.Println(w, db.First(&User{}, 1))
 	defer db.Close()
 
 	r.Body.Close()
