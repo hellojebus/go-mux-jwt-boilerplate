@@ -39,7 +39,15 @@ func main(){
 	if dbError != nil {
 		panic("Failed to connect to database")
 	}
+
+	//connection times out
+	//see: https://github.com/go-sql-driver/mysql/issues/257
+	db.DB().SetMaxIdleConns(0)
+
+
 	defer db.Close()
+
+	//handles model updates (no deletes or changes to existing columns)
 	db.AutoMigrate(&User{})
 
 	//routes
