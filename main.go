@@ -1,21 +1,20 @@
 package main
 
 import (
-	"github.com/gorilla/mux"
-	"net/http"
-	"log"
+	_ "github.com/jinzhu/gorm/dialects/mysql"
 	"os"
+	"github.com/jinzhu/gorm"
 	"github.com/jpfuentes2/go-env"
 	"path"
-	"github.com/jinzhu/gorm"
-	_ "github.com/jinzhu/gorm/dialects/mysql"
-	"fmt"
+	"github.com/gorilla/mux"
+	"log"
+	"net/http"
 	"encoding/json"
 )
 
 type User struct {
-	ID   int
-	Email string
+	ID   int `json:"id"`
+	Email string `json:"email"`
 }
 
 //connect to db
@@ -23,6 +22,10 @@ var dbHost string = os.Getenv("DB_HOST")
 var dbName string = os.Getenv("DB_NAME")
 var dbUser string = os.Getenv("DB_USERNAME")
 var dbPassword string = os.Getenv("DB_PASSWORD")
+
+//database global var error
+var db *gorm.DB
+var dbError error
 
 func main(){
 
@@ -34,6 +37,14 @@ func main(){
 	port := os.Getenv("PORT")
 	router := mux.NewRouter()
 
+	//connec to db
+	db, dbError = gorm.Open("mysql", dbUser+":"+ dbPassword +"@tcp(" + dbHost+ ":3306)/"+ dbName + "?charset=utf8&parseTime=True&loc=Local")
+	if dbError != nil {
+		panic("Failed to connect to database")
+	}
+	defer db.Close()
+	db.AutoMigrate(&User{})
+
 	//routes
 	router.HandleFunc("/", HomeHandler).Methods("GET")
 
@@ -42,17 +53,9 @@ func main(){
 }
 
 func HomeHandler(w http.ResponseWriter, r *http.Request) {
-
-	db, err := gorm.Open("mysql", dbUser+":"+ dbPassword +"@tcp(" + dbHost+ ":3306)/"+ dbName + "?charset=utf8&parseTime=True&loc=Local")
-	if err != nil {
-		fmt.Println(w, err)
-	}
-	user := db.First(&User{}, 1)
-	u, _ := json.Marshal(user)
+	var users []User
+	user := db.Find(&users)
 	w.Header().Set("Content-Type", "application/json")
-	w.Write(u)
-	defer db.Close()
-
+	json.NewEncoder(w).Encode(user)
 	r.Body.Close()
-
 }
