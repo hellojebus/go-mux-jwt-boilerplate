@@ -12,7 +12,8 @@ import (
 
 type User struct {
 	ID   int `json:"id"`
-	Email string `json:"email"`
+	Email string `gorm:"unique_index" json:"email"`
+	Name string `json:"name"`
 }
 
 //connect to db
@@ -42,16 +43,23 @@ func main(){
 	db.AutoMigrate(&User{})
 
 	//routes
-	router.HandleFunc("/", HomeHandler).Methods("GET")
+	router.HandleFunc("/users", UsersHandler).Methods("GET")
+	router.HandleFunc("/users/{id}", UserHandler).Methods("GET")
 
 	//create http server
 	log.Fatal(http.ListenAndServe(":"+port, router))
 }
 
-func HomeHandler(w http.ResponseWriter, r *http.Request) {
+func UsersHandler(w http.ResponseWriter, r *http.Request) {
 	var users []User
-	user := db.Find(&users)
+	u := db.Find(&users)
 	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(u)
+}
+
+func UserHandler(w http.ResponseWriter, r *http.Request){
+	params := mux.Vars(r)
+	var user User
+	db.First(&user, params["id"])
 	json.NewEncoder(w).Encode(user)
-	r.Body.Close()
 }
