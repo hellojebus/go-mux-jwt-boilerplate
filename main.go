@@ -28,7 +28,7 @@ func main(){
 	port := os.Getenv("PORT")
 	router := mux.NewRouter()
 
-	//connect to db
+	//db config vars
 	var dbHost string = os.Getenv("DB_HOST")
 	var dbName string = os.Getenv("DB_NAME")
 	var dbUser string = os.Getenv("DB_USERNAME")
@@ -44,7 +44,7 @@ func main(){
 	//see: https://github.com/go-sql-driver/mysql/issues/257
 	db.DB().SetMaxIdleConns(0)
 
-
+	//defer connection
 	defer db.Close()
 
 	//handles model updates (no deletes or changes to existing columns)
