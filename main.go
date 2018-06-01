@@ -4,8 +4,6 @@ import (
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 	"os"
 	"github.com/jinzhu/gorm"
-	"github.com/jpfuentes2/go-env"
-	"path"
 	"github.com/gorilla/mux"
 	"log"
 	"net/http"
@@ -30,8 +28,6 @@ var dbError error
 func main(){
 
 	//read env
-	pwd, _ := os.Getwd()
-	env.ReadEnv(path.Join(pwd, ".env"))
 
 	//init router
 	port := os.Getenv("PORT")

@@ -26,10 +26,6 @@
 		{
 			"ImportPath": "github.com/jinzhu/inflection",
 			"Rev": "04140366298a54a039076d798123ffa108fff46c"
-		},
-		{
-			"ImportPath": "github.com/jpfuentes2/go-env",
-			"Rev": "8e0a68de05f21bcefcd581c6b934a1d1e4390fa1"
 		}
 	]
 }
