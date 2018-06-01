@@ -49,7 +49,8 @@ func HomeHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	user := db.First(&User{}, 1)
 	u, _ := json.Marshal(user)
-	fmt.Println(w, u)
+	w.Header().Set("Content-Type", "application/json")
+	w.Write(u)
 	defer db.Close()
 
 	r.Body.Close()
