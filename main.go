@@ -60,9 +60,10 @@ func main(){
 
 func UsersHandler(w http.ResponseWriter, r *http.Request) {
 	var users []User
-	u := db.Find(&users)
+	//since we're passing a pointer to users, db.Find assigns array to the address
+	db.Find(&users)
 	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(u)
+	json.NewEncoder(w).Encode(users)
 }
 
 func UserHandler(w http.ResponseWriter, r *http.Request){
