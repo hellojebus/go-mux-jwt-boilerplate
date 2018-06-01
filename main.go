@@ -55,7 +55,6 @@ func main(){
 func HomeHandler(w http.ResponseWriter, r *http.Request) {
 	var users []User
 	user := db.Find(&users)
-	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(user)
 	r.Body.Close()
 }
