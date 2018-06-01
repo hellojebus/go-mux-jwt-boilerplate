@@ -21,7 +21,7 @@ type User struct {
 //connect to db
 var dbHost string = os.Getenv("DB_HOST")
 var dbName string = os.Getenv("DB_NAME")
-var dbUser string = os.Getenv("DB_USER")
+var dbUser string = os.Getenv("DB_USERNAME")
 var dbPassword string = os.Getenv("DB_PASSWORD")
 
 func main(){
