@@ -22,8 +22,6 @@ var dbError error
 
 func main(){
 
-	//read env
-
 	//init router
 	port := os.Getenv("PORT")
 	router := mux.NewRouter()
