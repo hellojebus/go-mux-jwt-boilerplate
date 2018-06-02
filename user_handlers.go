@@ -41,6 +41,7 @@ func UserLoginHandler(w http.ResponseWriter, r *http.Request) {
 		json.NewEncoder(w).Encode(&user)
 	} else {
 		err := NewJSONError("Password incorrect")
+		w.WriteHeader(http.StatusUnauthorized)
 		json.NewEncoder(w).Encode(&err)
 	}
 }
