@@ -11,7 +11,7 @@ import (
 )
 
 type User struct {
-	ID   int `json:"id"`
+	ID   int `gorm:"primary_key" json:"id"`
 	Email string `gorm:"unique_index" json:"email"`
 	Name string `json:"name"`
 }
@@ -38,7 +38,7 @@ func main(){
 		panic("Failed to connect to database")
 	}
 
-	//connection times out
+	//fix for connection timeout
 	//see: https://github.com/go-sql-driver/mysql/issues/257
 	db.DB().SetMaxIdleConns(0)
 
@@ -51,6 +51,7 @@ func main(){
 	//routes
 	router.HandleFunc("/users", UsersHandler).Methods("GET")
 	router.HandleFunc("/users/{id}", UserHandler).Methods("GET")
+	router.HandleFunc("/users", CreateUserHandler).Methods("POST")
 
 	//create http server
 	log.Fatal(http.ListenAndServe(":"+port, router))
@@ -68,5 +69,15 @@ func UserHandler(w http.ResponseWriter, r *http.Request){
 	params := mux.Vars(r)
 	var user User
 	db.First(&user, params["id"])
+	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(user)
+}
+
+func CreateUserHandler(w http.ResponseWriter, r *http.Request){
+	var user User
+	user.Email = r.FormValue("email")
+	user.Name = r.FormValue("name")
+	db.Create(&user)
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(&user)
 }
