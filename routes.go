@@ -28,6 +28,12 @@ var routes = Routes{
 		"UserCreate",
 		"POST",
 		"/users",
-		CreateUserHandler,
+		UserCreateHandler,
+	},
+	Route{
+		"UserLogin",
+		"POST",
+		"/users/login",
+		UserLoginHandler,
 	},
 }
