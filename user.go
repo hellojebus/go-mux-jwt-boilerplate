@@ -1,5 +1,7 @@
 package main
 
+import "golang.org/x/crypto/bcrypt"
+
 type User struct {
 	ID   int `gorm:"primary_key" json:"id"`
 	Email string `gorm:"unique_index" json:"email"`
@@ -7,10 +9,12 @@ type User struct {
 	Hash string `json:"-"`
 }
 
-func (u User) hashPassword(password string) string {
-	return password
+func (u User) hashPassword(password string) (string, error) {
+	bytes, err := bcrypt.GenerateFromPassword([]byte(password), 4)
+	return string(bytes), err
 }
 
-func (u User) checkPassword(password string) string {
-	return password
+func (u User) checkPassword(password string) bool {
+	err := bcrypt.CompareHashAndPassword([]byte(u.Hash), []byte(password))
+	return err == nil
 }
