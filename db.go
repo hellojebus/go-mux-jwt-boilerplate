@@ -30,8 +30,5 @@ func SetupDB() *gorm.DB {
 	//handles model updates (no deletes or changes to existing columns)
 	db.AutoMigrate(&User{})
 
-	//defer connection
-	//defer db.Close()
-
 	return db
 }
