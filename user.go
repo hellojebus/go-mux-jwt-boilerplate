@@ -9,9 +9,9 @@ type User struct {
 	Hash string `json:"-"`
 }
 
-func (u User) hashPassword(password string) (string, error) {
-	bytes, err := bcrypt.GenerateFromPassword([]byte(password), 4)
-	return string(bytes), err
+func (u User) hashPassword(password string) string {
+	bytes, _ := bcrypt.GenerateFromPassword([]byte(password), 4)
+	return string(bytes)
 }
 
 func (u User) checkPassword(password string) bool {

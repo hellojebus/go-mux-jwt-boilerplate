@@ -26,6 +26,8 @@ func CreateUserHandler(w http.ResponseWriter, r *http.Request){
 	var user User
 	user.Email = r.FormValue("email")
 	user.Name = r.FormValue("name")
+	//get password hash
+	user.Hash = user.hashPassword(r.FormValue("password"))
 	DB.Create(&user)
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(&user)
