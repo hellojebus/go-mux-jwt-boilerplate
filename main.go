@@ -7,14 +7,7 @@ import (
 	"github.com/gorilla/mux"
 	"log"
 	"net/http"
-	"encoding/json"
 )
-
-type User struct {
-	ID   int `gorm:"primary_key" json:"id"`
-	Email string `gorm:"unique_index" json:"email"`
-	Name string `json:"name"`
-}
 
 //database global var error
 var DB *gorm.DB
@@ -55,29 +48,4 @@ func main(){
 
 	//create http server
 	log.Fatal(http.ListenAndServe(":"+port, router))
-}
-
-func UsersHandler(w http.ResponseWriter, r *http.Request) {
-	var users []User
-	//since we're passing a pointer to users, db.Find assigns array to the address
-	DB.Find(&users)
-	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(users)
-}
-
-func UserHandler(w http.ResponseWriter, r *http.Request){
-	params := mux.Vars(r)
-	var user User
-	DB.First(&user, params["id"])
-	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(user)
-}
-
-func CreateUserHandler(w http.ResponseWriter, r *http.Request){
-	var user User
-	user.Email = r.FormValue("email")
-	user.Name = r.FormValue("name")
-	DB.Create(&user)
-	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(&user)
 }
