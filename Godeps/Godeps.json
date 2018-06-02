@@ -26,6 +26,14 @@
 		{
 			"ImportPath": "github.com/jinzhu/inflection",
 			"Rev": "04140366298a54a039076d798123ffa108fff46c"
+		},
+		{
+			"ImportPath": "golang.org/x/crypto/bcrypt",
+			"Rev": "5ba7f63082460102a45837dbd1827e10f9479ac0"
+		},
+		{
+			"ImportPath": "golang.org/x/crypto/blowfish",
+			"Rev": "5ba7f63082460102a45837dbd1827e10f9479ac0"
 		}
 	]
 }
