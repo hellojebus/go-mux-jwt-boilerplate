@@ -6,4 +6,10 @@ type User struct {
 	Name string `json:"name"`
 }
 
+func (u User) hashPassword(password string) string {
+	return password
+}
 
+func (u User) checkPassword(password string) string {
+	return password
+}
