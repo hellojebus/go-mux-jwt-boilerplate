@@ -25,7 +25,7 @@ var routes = Routes{
 		"GET",
 		"/users/{userId}",
 		UsersShowHandler,
-		false,
+		true,
 	},
 	Route{
 		"UserCreate",
