@@ -33,3 +33,4 @@ Gin is my preferred method for running the application locally as it will watch 
 []Add testing <br>
 []Add Delete User route <br>
 []Add Home route <br>
+[]Add exp to JWT <br>
