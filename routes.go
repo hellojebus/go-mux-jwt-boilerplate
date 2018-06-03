@@ -41,4 +41,11 @@ var routes = Routes{
 		UserLoginHandler,
 		false,
 	},
+	Route{
+		"UserDelete",
+		"DELETE",
+		"/users/{userId}",
+		UserDelete,
+		false,
+	},
 }

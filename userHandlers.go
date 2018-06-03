@@ -49,3 +49,16 @@ func UserLoginHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 }
+
+func UserDelete(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	var user User
+	var users []User
+
+	DB.First(&user, params["userId"])
+	DB.Delete(&user)
+
+	DB.Find(&users)
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(users)
+}
