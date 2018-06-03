@@ -63,6 +63,17 @@ func UsersDelete(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(users)
 }
 
-func UsersUpdate(){
+func UsersUpdate(w http.ResponseWriter, r *http.Request){
+	params := mux.Vars(r)
+	var user User
+	reqUserId := r.Header.Get("userId")
 
+	w.Header().Set("Content-Type", "application/json")
+	if(params["userId"] != reqUserId){
+		NewErrorResponse(w, http.StatusUnauthorized, "Not allowed to edit other users")
+		return
+	}
+	DB.First(&user, params["userId"])
+	DB.Model(&user).Update("name", r.FormValue("name"))
+	json.NewEncoder(w).Encode(&user)
 }
