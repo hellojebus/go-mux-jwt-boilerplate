@@ -8,7 +8,7 @@ import (
 )
 
 type ErrorResponse struct {
-	Type string `json:"type"`
+	Error bool `json:"error"`
 	Message string `json:"message"`
 }
 
@@ -19,7 +19,7 @@ Returns valid JSON with error type and response code
 
 func NewErrorResponse(w http.ResponseWriter, statusCode int, response string){
 	error := ErrorResponse{
-		"error",
+		true,
 		response,
 	}
 	w.Header().Set("Content-Type", "application/json")
