@@ -12,6 +12,11 @@ type ErrorResponse struct {
 	Message string `json:"message"`
 }
 
+/*
+HTTP Response handling for errors,
+Returns valid JSON with error type and response code
+*/
+
 func NewErrorResponse(w http.ResponseWriter, statusCode int, response string){
 	error := ErrorResponse{
 		"error",
@@ -21,6 +26,11 @@ func NewErrorResponse(w http.ResponseWriter, statusCode int, response string){
 	w.WriteHeader(statusCode)
 	json.NewEncoder(w).Encode(&error)
 }
+
+
+/*
+Verify JWT token based on environment var (JWT_SECRET)
+*/
 
 func verifyToken(tokenString string) (jwt.Claims, error) {
 	signingKey := []byte(os.Getenv("JWT_SECRET"))
