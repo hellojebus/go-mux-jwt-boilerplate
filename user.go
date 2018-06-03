@@ -30,7 +30,7 @@ func (u User) checkPassword(password string) bool {
 func (u User) generateJWT() (JWTToken, error) {
 	signingKey := []byte(os.Getenv("JWT_SECRET"))
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
-		"user_id": u.ID,
+		"user_id": string(u.ID),
 		"name": u.Name,
 		"email": u.Email,
 	})
