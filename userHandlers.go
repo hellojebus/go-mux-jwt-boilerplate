@@ -17,7 +17,7 @@ func UsersHandler(w http.ResponseWriter, r *http.Request) {
 func UserHandler(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
 	var user User
-	DB.Where("id = ?", params["id"]).Find(&user)
+	DB.First(&user, params["userId"])
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(user)
 }
