@@ -26,7 +26,7 @@ func (u User) checkPassword(password string) bool {
 func (u User) generateJWT() (string, error) {
 	signingKey := os.Getenv("JWT_SECRET")
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
-		"id": u.ID,
+		"user_id": u.ID,
 		"name": u.Name,
 		"email": u.Email,
 	})
