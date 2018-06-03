@@ -19,9 +19,11 @@ You will need to create a user by sending a post request to the createUser route
 
 ## Configuration
 
-Make sure to copy `.env.sample` to `.env` and add all needed data (especially for database connection)
+Make sure to copy `.env.sample` to `.env` and update all fields (DB fields are important!)
 
-Gorm is setup to automigrate the Users table, so nothing needed other than database creation and connection
+**Please note that this is using the MySQL driver, if you prefer to use another driver, update `db.go` accordingly**
+
+Gorm is setup to automigrate the Users table, so it should be plug and play.
 
 ## Installing and running
 
