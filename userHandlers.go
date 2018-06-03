@@ -38,8 +38,14 @@ func UserLoginHandler(w http.ResponseWriter, r *http.Request) {
 	DB.Where("email = ?", r.FormValue("email")).Find(&user)
 	w.Header().Set("Content-Type", "application/json")
 	if user.checkPassword(r.FormValue("password")) {
-		json.NewEncoder(w).Encode(&user)
+		token, err := user.generateJWT()
+		if err != nil {
+			NewErrorResponse(w, http.StatusUnauthorized, "Error: " + err.Error())
+			return
+		}
+		json.NewEncoder(w).Encode(&token)
 	} else {
 		NewErrorResponse(w, http.StatusUnauthorized, "Password incorrect")
+		return
 	}
 }
