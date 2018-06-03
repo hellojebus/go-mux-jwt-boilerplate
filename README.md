@@ -18,7 +18,9 @@ You will need to create a user by sending a post request to the addUser route.
 
 ## Configuration
 
-Make sure to copy `.env.sample` to `.env` and add correct config details
+Make sure to copy `.env.sample` to `.env` and add all needed data (especially for database connection)
+
+Gorm is setup to automigrate the Users table, so nothing needed other than database creation and connection
 
 ## Installing and running
 
