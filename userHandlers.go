@@ -22,7 +22,7 @@ func UsersShowHandler(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(user)
 }
 
-func UserCreateHandler(w http.ResponseWriter, r *http.Request) {
+func UsersCreateHandler(w http.ResponseWriter, r *http.Request) {
 	var user User
 	user.Email = r.FormValue("email")
 	user.Name = r.FormValue("name")
@@ -33,7 +33,7 @@ func UserCreateHandler(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(&user)
 }
 
-func UserLoginHandler(w http.ResponseWriter, r *http.Request) {
+func UsersLoginHandler(w http.ResponseWriter, r *http.Request) {
 	var user User
 	DB.Where("email = ?", r.FormValue("email")).Find(&user)
 	w.Header().Set("Content-Type", "application/json")
@@ -50,7 +50,7 @@ func UserLoginHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func UserDelete(w http.ResponseWriter, r *http.Request) {
+func UsersDelete(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
 	var user User
 	var users []User
@@ -61,4 +61,8 @@ func UserDelete(w http.ResponseWriter, r *http.Request) {
 	DB.Find(&users)
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(users)
+}
+
+func UsersUpdate(){
+
 }
