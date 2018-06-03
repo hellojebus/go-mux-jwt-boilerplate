@@ -22,7 +22,7 @@ Make sure to copy `.env.sample` to `.env` and add correct config details
 
 ## Installing and running
 
-To run using Gin: `gun run main.go`
+To run using Gin: `gin run main.go`
 
 To run using Go: `go run *.go`
 
