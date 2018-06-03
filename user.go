@@ -13,6 +13,10 @@ type User struct {
 	Hash string `json:"-"` //hides from any json marshalling output
 }
 
+type JWTToken struct {
+	Token string `json:"token"`
+}
+
 func (u User) hashPassword(password string) string {
 	bytes, _ := bcrypt.GenerateFromPassword([]byte(password), 4)
 	return string(bytes)
@@ -23,13 +27,13 @@ func (u User) checkPassword(password string) bool {
 	return err == nil
 }
 
-func (u User) generateJWT() (string, error) {
-	signingKey := os.Getenv("JWT_SECRET")
+func (u User) generateJWT() (JWTToken, error) {
+	signingKey := []byte(os.Getenv("JWT_SECRET"))
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
 		"user_id": u.ID,
 		"name": u.Name,
 		"email": u.Email,
 	})
 	tokenString, err := token.SignedString(signingKey)
-	return tokenString, err
+	return JWTToken{tokenString}, err
 }
