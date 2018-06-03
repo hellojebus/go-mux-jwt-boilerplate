@@ -8,11 +8,15 @@ func NewRouter() *mux.Router {
 	router := mux.NewRouter()
 
 	for _, r := range routes {
+		handler := r.HandlerFunc
+		/*if r.Protected {
+			handler = jwtMiddleware(r.HandlerFunc)
+		}*/
 		router.
 			Methods(r.Method).
 			Path(r.Pattern).
 			Name(r.Name).
-			Handler(r.HandlerFunc)
+			Handler(handler)
 	}
 
 	return router
