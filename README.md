@@ -10,12 +10,12 @@ Basic CRUD* routes for user management _*Missing the U in CRUD ;)_
 
 * Show Users `GET /users`
 * Show User `GET /users/{userId}`
-* Add User `POST /users`
+* Create User `POST /users`
 * User Login `POST /users/login`
 * Delete User `DELETE /users/{userId}`
 
 Several routes are protected and require JWT tokens, which can be generated using the login route.
-You will need to create a user by sending a post request to the addUser route.
+You will need to create a user by sending a post request to the createUser route.
 
 ## Configuration
 
