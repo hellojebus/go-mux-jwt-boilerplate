@@ -6,7 +6,7 @@ The purpose of this web app is for me to learn Go REST API Development using Mux
 
 ## What's included
 
-Basic CRUD* routes for user management _*Missing the U in CRUD ;)_ 
+Basic CRUD routes for user management  
 
 * Show Users `GET /users`
 * Show User `GET /users/{userId}`
