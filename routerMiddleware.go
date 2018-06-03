@@ -3,6 +3,7 @@ package main
 import (
 	"net/http"
 	"strings"
+	"github.com/dgrijalva/jwt-go"
 )
 
 func jwtMiddleware(next http.Handler) http.Handler {
@@ -13,13 +14,16 @@ func jwtMiddleware(next http.Handler) http.Handler {
 			return
 		}
 		tokenString = strings.Replace(tokenString, "Bearer ", "", 1)
-		_, err := verifyToken(tokenString)
+		claims, err := verifyToken(tokenString)
 		if err != nil {
 			NewErrorResponse(w, http.StatusUnauthorized, "Error verifying JWT token: " + err.Error())
 			return
 		}
-		//userId := claims.(jwt.MapClaims)["user_id"].(string)
-		//r.Header.Set("userId", userId)
+
+		//pass userId claim to req
+		userId := claims.(jwt.MapClaims)["user_id"].(string)
+		r.Header.Set("userId", userId)
+
 		next.ServeHTTP(w, r)
 	})
 }
