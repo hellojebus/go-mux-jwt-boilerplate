@@ -38,5 +38,6 @@ To view application view `localhost:3000 or locahost:YOUR_PORT_ENV` in browser
  
 []Add testing <br>
 []Add Delete User route <br>
+[]Add Update User route <br>
 []Add Home route <br>
 []Add exp to JWT <br>
