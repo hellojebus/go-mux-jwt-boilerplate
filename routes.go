@@ -18,7 +18,7 @@ var routes = Routes{
 		"GET",
 		"/users",
 		UsersIndexHandler,
-		true,
+		false,
 	},
 	Route{
 		"UsersShow",
@@ -46,6 +46,13 @@ var routes = Routes{
 		"DELETE",
 		"/users/{userId}",
 		UsersDelete,
-		false,
+		true,
+	},
+	Route{
+		"UsersUpdate",
+		"PUT",
+		"/users/{userId}",
+		UsersUpdate,
+		true,
 	},
 }
