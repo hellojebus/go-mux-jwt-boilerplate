@@ -14,6 +14,8 @@ func NewRouter() *mux.Router {
 		var handler http.Handler
 
 		handler = r.HandlerFunc
+
+		//check to see if route should be protected with jwt
 		if r.Protected {
 			handler = jwtMiddleware(r.HandlerFunc)
 		}
