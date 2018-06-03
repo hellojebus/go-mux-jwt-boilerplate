@@ -13,6 +13,7 @@ Basic CRUD* routes for user management _*Missing the U in CRUD ;)_
 * Create User `POST /users`
 * User Login `POST /users/login`
 * Delete User `DELETE /users/{userId}`
+* Update User `PUT /users/{userId}` * Note only the user can update their own name
 
 Several routes are protected and require JWT tokens, which can be generated using the login route.
 You will need to create a user by sending a post request to the createUser route.
@@ -40,6 +41,5 @@ To view application view `localhost:3000 or locahost:YOUR_PORT_ENV` in browser
 ## Todos
  
 [] Add testing <br>
-[] Add Update User route <br>
 [] Add Home route <br>
 [] Add User Role to illustrate how relationships work with Gorm<br>
