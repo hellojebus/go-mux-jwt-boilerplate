@@ -6,23 +6,23 @@ import (
 	"github.com/gorilla/mux"
 )
 
-var UsersHandler = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+func UsersHandler(w http.ResponseWriter, r *http.Request) {
 	var users []User
 	//since we're passing a pointer to users, db.Find assigns array to the address
 	DB.Find(&users)
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(users)
-})
+}
 
-var UserHandler = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+func UserHandler(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
 	var user User
-	DB.First(&user, params["id"])
+	DB.Where("id = ?", params["id"]).Find(&user)
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(user)
-})
+}
 
-var UserCreateHandler = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+func UserCreateHandler(w http.ResponseWriter, r *http.Request) {
 	var user User
 	user.Email = r.FormValue("email")
 	user.Name = r.FormValue("name")
@@ -31,7 +31,7 @@ var UserCreateHandler = http.HandlerFunc(func(w http.ResponseWriter, r *http.Req
 	DB.Create(&user)
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(&user)
-})
+}
 
 func UserLoginHandler(w http.ResponseWriter, r *http.Request) {
 	var user User
