@@ -4,6 +4,7 @@ import (
 	"golang.org/x/crypto/bcrypt"
 	"os"
 	"github.com/dgrijalva/jwt-go"
+	"time"
 )
 
 type User struct {
@@ -30,6 +31,7 @@ func (u User) checkPassword(password string) bool {
 func (u User) generateJWT() (JWTToken, error) {
 	signingKey := []byte(os.Getenv("JWT_SECRET"))
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
+		"exp": time.Now().Add(time.Hour * 1 * 1).Unix(),
 		"user_id": int(u.ID),
 		"name": u.Name,
 		"email": u.Email,
