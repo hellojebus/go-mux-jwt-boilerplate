@@ -30,5 +30,5 @@ Gin is my preferred method for running the application locally as it will watch 
   
 ## Todos
  
-Add testing 
-Add Delete User route
+- Add testing 
+- Add Delete User route
