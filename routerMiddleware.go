@@ -4,6 +4,7 @@ import (
 	"net/http"
 	"strings"
 	"github.com/dgrijalva/jwt-go"
+	"strconv"
 )
 
 func jwtMiddleware(next http.Handler) http.Handler {
@@ -21,9 +22,9 @@ func jwtMiddleware(next http.Handler) http.Handler {
 		}
 
 		//pass userId claim to req
-		userId := claims.(jwt.MapClaims)["user_id"].(string)
+		//todo: find a better way to convert the claim to string
+		userId := strconv.FormatFloat(claims.(jwt.MapClaims)["user_id"].(float64), 'g', 1, 64)
 		r.Header.Set("userId", userId)
-
 		next.ServeHTTP(w, r)
 	})
 }
