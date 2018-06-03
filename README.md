@@ -12,5 +12,5 @@ To run using Gin: `gun run main.go`
 
 To run using Go: `go run *.go`
 
-Gin is my preferred method for running the application locally as it will watch your files for changes and automatically re-rerun the application.
+Gin is my preferred method for running the application locally as it will watch your files for changes and automatically re-run the application.
  
