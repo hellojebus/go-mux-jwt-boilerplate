@@ -6,12 +6,13 @@ The purpose of this web app to learn Go REST API Development using Mux (router),
 
 ## What's included
 
-Basic CRUD* routes for user management _*Missing the U & D in CRUD ;)_ 
+Basic CRUD* routes for user management _*Missing the U in CRUD ;)_ 
 
 * Show Users `GET /users`
 * Show User `GET /users/{userId}`
 * Add User `POST /users`
 * User Login `POST /users/login`
+* Delete User `DELETE /users/{userId}`
 
 Several routes are protected and require JWT tokens, which can be generated using the login route.
 You will need to create a user by sending a post request to the addUser route.
@@ -37,7 +38,6 @@ To view application view `localhost:3000 or locahost:YOUR_PORT_ENV` in browser
 ## Todos
  
 [] Add testing <br>
-[] Add Delete User route <br>
 [] Add Update User route <br>
 [] Add Home route <br>
 [] Add exp to JWT <br>
