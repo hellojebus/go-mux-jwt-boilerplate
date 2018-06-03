@@ -1,6 +1,6 @@
 # GoLang Mux, Gorm, JWT REST API Boilerplate 
 
-The purpose of this web app to learn Go REST API Development using Mux (router), Gorm (ORM), JSON Web Tokens (JWT), and Golang development in general. The application is optimized for Heroku deployment using go Go Build Kit and Godep for dependency management.
+The purpose of this web app to learn Go REST API Development using Mux (router), Gorm (ORM), JSON Web Tokens (JWT), and Golang development in general. The application is optimized for Heroku deployment using the Go Build Kit and Godep for dependency management.
 
 **This is for educational purposes only and probably unsuitable for production** 
 
