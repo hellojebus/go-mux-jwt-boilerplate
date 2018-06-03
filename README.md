@@ -24,11 +24,15 @@ Gorm is setup to automigrate the Users table, so nothing needed other than datab
 
 ## Installing and running
 
+Make sure to have all required external deps. Look at Godeps config file to view them all.
+
 To run using Gin: `gin run main.go`
 
 To run using Go: `go run *.go`
 
 Gin is my preferred method for running the application locally as it will watch your files for changes and automatically re-run the application.
+
+To view application view `localhost:3000 or locahost:YOUR_PORT_ENV` in browser
   
 ## Todos
  
