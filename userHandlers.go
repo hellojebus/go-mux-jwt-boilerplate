@@ -6,7 +6,7 @@ import (
 	"github.com/gorilla/mux"
 )
 
-func UsersHandler(w http.ResponseWriter, r *http.Request) {
+func UsersIndexHandler(w http.ResponseWriter, r *http.Request) {
 	var users []User
 	//since we're passing a pointer to users, db.Find assigns array to the address
 	DB.Find(&users)
@@ -14,7 +14,7 @@ func UsersHandler(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(users)
 }
 
-func UserHandler(w http.ResponseWriter, r *http.Request) {
+func UsersShowHandler(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
 	var user User
 	DB.First(&user, params["userId"])
@@ -40,8 +40,6 @@ func UserLoginHandler(w http.ResponseWriter, r *http.Request) {
 	if user.checkPassword(r.FormValue("password")) {
 		json.NewEncoder(w).Encode(&user)
 	} else {
-		err := NewJSONError("Password incorrect")
-		w.WriteHeader(http.StatusUnauthorized)
-		json.NewEncoder(w).Encode(&err)
+		NewErrorResponse(w, http.StatusUnauthorized, "Password incorrect")
 	}
 }
