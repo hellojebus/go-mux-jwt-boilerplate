@@ -2,7 +2,7 @@
 
 Envoz is a side project of mine that I use for managing invoices for freelance work. 
 
-The purpose of this Golang implementation is to learn Go REST API Development using Mux (router), Gorm (ORM), and Golang development in general. The application is optimized for Heroku deployment using go Go Build Kit and Godep for dependency management.
+The purpose of this Golang implementation is to learn Go REST API Development using Mux (router), Gorm (ORM), JSON Web Tokens (JWT), and Golang development in general. The application is optimized for Heroku deployment using go Go Build Kit and Godep for dependency management.
 
 
 
