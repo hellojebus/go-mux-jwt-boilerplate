@@ -1,6 +1,9 @@
 package main
 
-import "github.com/gorilla/mux"
+import (
+	"github.com/gorilla/mux"
+	"net/http"
+)
 
 func NewRouter() *mux.Router {
 
@@ -8,19 +11,18 @@ func NewRouter() *mux.Router {
 	router := mux.NewRouter()
 
 	for _, r := range routes {
+		var handler http.Handler
+
+		handler = r.HandlerFunc
 		if r.Protected {
-			router.
-				Methods(r.Method).
-				Path(r.Pattern).
-				Name(r.Name).
-				Handler(jwtMiddleware(r.HandlerFunc))
-		} else {
-			router.
-				Methods(r.Method).
-				Path(r.Pattern).
-				Name(r.Name).
-				Handler(r.HandlerFunc)
+			handler = jwtMiddleware(r.HandlerFunc)
 		}
+
+		router.
+			Methods(r.Method).
+			Path(r.Pattern).
+			Name(r.Name).
+			Handler(handler)
 
 	}
 
