@@ -1,6 +1,10 @@
 package main
 
-import "golang.org/x/crypto/bcrypt"
+import (
+	"golang.org/x/crypto/bcrypt"
+	"os"
+	"github.com/dgrijalva/jwt-go"
+)
 
 type User struct {
 	ID   int `gorm:"primary_key" json:"id"`
@@ -17,4 +21,15 @@ func (u User) hashPassword(password string) string {
 func (u User) checkPassword(password string) bool {
 	err := bcrypt.CompareHashAndPassword([]byte(u.Hash), []byte(password))
 	return err == nil
+}
+
+func (u User) generateJWT() (string, error) {
+	signingKey := os.Getenv("JWT_SECRET")
+	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
+		"id": u.ID,
+		"name": u.Name,
+		"email": u.Email,
+	})
+	tokenString, err := token.SignedString(signingKey)
+	return tokenString, err
 }
