@@ -25,14 +25,14 @@ var routes = Routes{
 		"GET",
 		"/users/{userId}",
 		UserHandler,
-		true,
+		false,
 	},
 	Route{
 		"UserCreate",
 		"POST",
 		"/users",
 		UserCreateHandler,
-		true,
+		false,
 	},
 	Route{
 		"UserLogin",
