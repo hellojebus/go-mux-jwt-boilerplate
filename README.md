@@ -44,6 +44,6 @@ To view application in browser: `localhost:3000 (gin run) or locahost:YOUR_PORT_
   
 ## Todos
  
-[] Add testing <br>
-[] Add Home route <br>
-[] Add User Role to illustrate how relationships work with Gorm<br>
+[] Detach userHandlers DB functions from http for testing purposes<br>
+[] Refactor anything that can be it's own local package <br>
+[] Add User Role to illustrate how relationships work with Gorm <br>
