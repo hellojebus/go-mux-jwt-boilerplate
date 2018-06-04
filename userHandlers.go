@@ -28,7 +28,11 @@ func UsersCreateHandler(w http.ResponseWriter, r *http.Request) {
 	user.Name = r.FormValue("name")
 	//get password hash
 	user.Hash = user.hashPassword(r.FormValue("password"))
-	DB.Create(&user)
+	err := DB.Create(&user).Error
+	if err != nil {
+		NewErrorResponse(w, http.StatusUnauthorized, "Error: " + err.Error())
+		return
+	}
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(&user)
 }
