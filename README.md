@@ -30,13 +30,16 @@ Gorm is setup to automigrate the Users table, so it should be plug and play.
 
 Make sure to have all required external deps. Look at Godeps config file to view them all.
 
-To run using Gin: `gin run main.go`
+**Preferred Method, Live Reloading (optional):**
+
+Install Gin `go get github.com/codegangsta/gin`
+Then run: `gin run main.go`
+
+**Otherwise:**
 
 To run using Go: `go run *.go`
 
-Gin is my preferred method for running the application locally as it will watch your files for changes and automatically re-run the application.
-
-To view application view `localhost:3000 or locahost:YOUR_PORT_ENV` in browser
+To view application in browser: `localhost:3000 (gin run) or locahost:YOUR_PORT_ENV (go run)`
   
 ## Todos
  
