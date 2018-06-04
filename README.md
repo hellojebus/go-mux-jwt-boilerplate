@@ -26,13 +26,14 @@ Make sure to copy `.env.sample` to `.env` and update all fields (DB fields are i
 
 Gorm is setup to automigrate the Users table, so it should be plug and play.
 
-## Installing and running
+## Installation
 
 Make sure to have all required external deps. Look at Godeps config file to view them all.
 
 **Preferred Method, Live Reloading (optional):**
 
 Install Gin `go get github.com/codegangsta/gin`
+
 Then run: `gin run main.go`
 
 **Otherwise:**
