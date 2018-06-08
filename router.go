@@ -3,6 +3,8 @@ package main
 import (
 	"github.com/gorilla/mux"
 	"net/http"
+	"github.com/hellojebus/go-envoz-api/user"
+	customRouter "github.com/hellojebus/go-envoz-api/router"
 )
 
 func NewRouter() *mux.Router {
@@ -11,9 +13,9 @@ func NewRouter() *mux.Router {
 	router := mux.NewRouter()
 
 	//append user routes
-	AppRoutes = append(AppRoutes, userRoutes)
+	customRouter.AppRoutes = append(customRouter.AppRoutes, user.Routes)
 
-	for _, route := range AppRoutes {
+	for _, route := range customRouter.AppRoutes {
 
 		//create subroute
 		routePrefix := router.PathPrefix(route.Prefix).Subrouter()
