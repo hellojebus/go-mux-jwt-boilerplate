@@ -10,6 +10,7 @@ func NewRouter() *mux.Router {
 	//init router
 	router := mux.NewRouter()
 
+	//append user routes
 	AppRoutes = append(AppRoutes, userRoutes)
 
 	for _, route := range AppRoutes {
