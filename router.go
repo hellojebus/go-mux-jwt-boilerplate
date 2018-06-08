@@ -15,9 +15,12 @@ func NewRouter() *mux.Router {
 
 	for _, route := range AppRoutes {
 
-		subRoute := router.PathPrefix(route.Prefix).Subrouter()
+		//create subroute
+		routePrefix := router.PathPrefix(route.Prefix).Subrouter()
 
 		for _, r := range route.SubRoutes {
+
+
 			var handler http.Handler
 			handler = r.HandlerFunc
 
@@ -26,7 +29,8 @@ func NewRouter() *mux.Router {
 				handler = jwtMiddleware(r.HandlerFunc)
 			}
 
-			subRoute.
+			//attach sub route
+			routePrefix.
 				Path(r.Pattern).
 				Handler(handler).
 				Methods(r.Method).
