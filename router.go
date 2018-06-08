@@ -10,21 +10,27 @@ func NewRouter() *mux.Router {
 	//init router
 	router := mux.NewRouter()
 
-	for _, r := range routes {
-		var handler http.Handler
+	AppRoutes = append(AppRoutes, userRoutes)
 
-		handler = r.HandlerFunc
+	for _, route := range AppRoutes {
 
-		//check to see if route should be protected with jwt
-		if r.Protected {
-			handler = jwtMiddleware(r.HandlerFunc)
+		subRoute := router.PathPrefix(route.Prefix).Subrouter()
+
+		for _, r := range route.SubRoutes {
+			var handler http.Handler
+			handler = r.HandlerFunc
+
+			//check to see if route should be protected with jwt
+			if r.Protected {
+				handler = jwtMiddleware(r.HandlerFunc)
+			}
+
+			subRoute.
+				Path(r.Pattern).
+				Handler(handler).
+				Methods(r.Method).
+				Name(r.Name)
 		}
-
-		router.
-			Methods(r.Method).
-			Path(r.Pattern).
-			Name(r.Name).
-			Handler(handler)
 
 	}
 

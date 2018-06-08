@@ -2,6 +2,11 @@ package main
 
 import "net/http"
 
+type RoutePrefix struct {
+	Prefix string
+	SubRoutes []Route
+}
+
 type Route struct {
 	Name string
 	Method string
@@ -10,49 +15,4 @@ type Route struct {
 	Protected bool
 }
 
-type Routes []Route
-
-var routes = Routes{
-	Route{
-		"UsersIndex",
-		"GET",
-		"/users",
-		UsersIndexHandler,
-		false,
-	},
-	Route{
-		"UsersShow",
-		"GET",
-		"/users/{userId}",
-		UsersShowHandler,
-		true,
-	},
-	Route{
-		"UsersCreate",
-		"POST",
-		"/users",
-		UsersCreateHandler,
-		false,
-	},
-	Route{
-		"UsersLogin",
-		"POST",
-		"/users/login",
-		UsersLoginHandler,
-		false,
-	},
-	Route{
-		"UsersDelete",
-		"DELETE",
-		"/users/{userId}",
-		UsersDelete,
-		true,
-	},
-	Route{
-		"UsersUpdate",
-		"PUT",
-		"/users/{userId}",
-		UsersUpdate,
-		true,
-	},
-}
+var AppRoutes []RoutePrefix
