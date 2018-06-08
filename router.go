@@ -18,6 +18,7 @@ func NewRouter() *mux.Router {
 		//create subroute
 		routePrefix := router.PathPrefix(route.Prefix).Subrouter()
 
+		//loop through each sub route
 		for _, r := range route.SubRoutes {
 
 			var handler http.Handler
