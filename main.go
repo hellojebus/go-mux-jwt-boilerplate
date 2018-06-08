@@ -4,6 +4,7 @@ import (
 	"os"
 	"log"
 	"net/http"
+	"github.com/hellojebus/go-envoz-api/db"
 )
 
 func main(){
@@ -13,8 +14,8 @@ func main(){
 	router := NewRouter()
 
 	//Setup database
-	DB = SetupDB()
-	defer DB.Close()
+	db.DB = db.SetupDB()
+	defer db.DB.Close()
 
 	//create http server
 	log.Fatal(http.ListenAndServe(":"+port, router))
