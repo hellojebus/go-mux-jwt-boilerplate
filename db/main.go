@@ -1,4 +1,4 @@
-package main
+package db
 
 import (
 	_ "github.com/jinzhu/gorm/dialects/mysql"
@@ -26,9 +26,6 @@ func SetupDB() *gorm.DB {
 	//fix for connection timeout
 	//see: https://github.com/go-sql-driver/mysql/issues/257
 	db.DB().SetMaxIdleConns(0)
-
-	//handles model updates (no deletes or changes to existing columns)
-	db.AutoMigrate(&User{})
 
 	return db
 }
