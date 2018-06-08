@@ -1,4 +1,4 @@
-package main
+package middleware
 
 import (
 	"net/http"
@@ -8,7 +8,7 @@ import (
 	customHTTP "github.com/hellojebus/go-envoz-api/http"
 )
 
-func jwtMiddleware(next http.Handler) http.Handler {
+func JWTMiddleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		tokenString := r.Header.Get("Authorization")
 		if len(tokenString) == 0 {
@@ -16,7 +16,7 @@ func jwtMiddleware(next http.Handler) http.Handler {
 			return
 		}
 		tokenString = strings.Replace(tokenString, "Bearer ", "", 1)
-		claims, err := customHTTP.VerifyToken(tokenString)
+		claims, err := VerifyToken(tokenString)
 		if err != nil {
 			customHTTP.NewErrorResponse(w, http.StatusUnauthorized, "Error verifying JWT token: " + err.Error())
 			return

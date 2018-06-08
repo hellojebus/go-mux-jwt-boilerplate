@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"github.com/hellojebus/go-envoz-api/user"
 	customRouter "github.com/hellojebus/go-envoz-api/router"
+	"github.com/hellojebus/go-envoz-api/middleware"
 )
 
 func NewRouter() *mux.Router {
@@ -28,7 +29,7 @@ func NewRouter() *mux.Router {
 
 			//check to see if route should be protected with jwt
 			if r.Protected {
-				handler = jwtMiddleware(r.HandlerFunc)
+				handler = middleware.JWTMiddleware(r.HandlerFunc)
 			}
 
 			//attach sub route
