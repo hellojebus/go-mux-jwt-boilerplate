@@ -8,7 +8,7 @@ import (
 	customHTTP "github.com/hellojebus/go-envoz-api/http"
 )
 
-func UsersIndexHandler(w http.ResponseWriter, r *http.Request) {
+func IndexHandler(w http.ResponseWriter, r *http.Request) {
 	var users []User
 	//since we're passing a pointer to users, db.Find assigns array to the address
 	db.DB.Find(&users)
@@ -16,7 +16,7 @@ func UsersIndexHandler(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(users)
 }
 
-func UsersShowHandler(w http.ResponseWriter, r *http.Request) {
+func ShowHandler(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
 	var user User
 	db.DB.First(&user, params["userId"])
@@ -24,7 +24,7 @@ func UsersShowHandler(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(user)
 }
 
-func UsersCreateHandler(w http.ResponseWriter, r *http.Request) {
+func CreateHandler(w http.ResponseWriter, r *http.Request) {
 	var user User
 	user.Email = r.FormValue("email")
 	user.Name = r.FormValue("name")
@@ -39,7 +39,7 @@ func UsersCreateHandler(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(&user)
 }
 
-func UsersLoginHandler(w http.ResponseWriter, r *http.Request) {
+func LoginHandler(w http.ResponseWriter, r *http.Request) {
 	var user User
 	db.DB.Where("email = ?", r.FormValue("email")).Find(&user)
 	w.Header().Set("Content-Type", "application/json")
@@ -56,7 +56,7 @@ func UsersLoginHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func UsersDelete(w http.ResponseWriter, r *http.Request) {
+func DeleteHandler(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
 	var user User
 	var users []User
@@ -69,7 +69,7 @@ func UsersDelete(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(users)
 }
 
-func UsersUpdate(w http.ResponseWriter, r *http.Request){
+func UpdateHandler(w http.ResponseWriter, r *http.Request){
 	params := mux.Vars(r)
 	var user User
 	reqUserId := r.Header.Get("userId")
