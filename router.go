@@ -20,7 +20,6 @@ func NewRouter() *mux.Router {
 
 		for _, r := range route.SubRoutes {
 
-
 			var handler http.Handler
 			handler = r.HandlerFunc
 
